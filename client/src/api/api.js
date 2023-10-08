@@ -1,7 +1,7 @@
 import axios from 'axios'
 const Swal=require('sweetalert2')
 
-const API_URL='http://localhost:8000/api'
+const API_URL='https://sg-backend-2c7v.onrender.com/api'
 let apifunctions={
    signup:async (email,name,password)=>{
     try {

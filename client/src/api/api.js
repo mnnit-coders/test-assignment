@@ -33,37 +33,46 @@ let apifunctions={
             const result=await axios.post(`${API_URL}/login`,{
                 email,password
             })
-            if(!result.data.flag) return Swal.fire(
+            // console.log(result.data)
+            if(!result.data.flag){ Swal.fire(
                 result.data.message,
                 'something went wrong',
                 'error'
             )
-            return result.data.message;
+            return {token:"",flag:false};
+        }
+        return {token:result.data.message,flag:true};
         } catch (error) {
-            return Swal.fire(
+            // console.log(error.message)
+            Swal.fire(
                 error.message,
                 'Something went wrong',
                 'error'
-              )
+            )
+            return {token:"",flag:false};
         }
    },
    getuser:async (token)=>{
-    try {
+       try {
         const result=await axios.post(`${API_URL}/user`,{
-            token
+            token:token.token
         })
-        if(!result.data.flag)  return Swal.fire(
+        // console.log(result)
+        if(!result.data.flag) { Swal.fire(
             result.data.message,
             'Something went wrong',
             'error'
           )
-          return result.data.message
+          return {data:"",flag:false};
+        }
+        return {data:result.data.message,flag:true};
     } catch (error) {
-        return Swal.fire(
+        Swal.fire(
             error.message,
             'Something went wrong',
             'error'
-          )
+        )
+        return {data:"",flag:false};
     }
    }
 }

@@ -16,8 +16,11 @@ function LoginPage() {
   const handleLogin = async (e) => {
     e.preventDefault();
     const result=await apifunctions.login(email,password);
-    setCookie('userid',result);
+    if(result.flag){
+      setCookie('userid',result);
     return navigate('/');
+    }
+    return;
   };
 
   return (

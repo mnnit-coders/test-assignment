@@ -14,8 +14,10 @@ const HomePage = () => {
         else{
             const getdata=async()=>{
                 var data=await apifunctions.getuser(token)
-                console.log(data)
-                setName(data.name);
+                console.log("data",data.data)
+                if(data.flag){
+                    setName(data.data.name);
+                }
             };
             getdata();
             
@@ -23,9 +25,7 @@ const HomePage = () => {
     })
 
     const handleLogout=(e)=>{
-        // e.preventDefault();
         try {
-            console.log('hello')
             cookie.remove('userid');
             return navigate('/login');
         } catch (error) {
